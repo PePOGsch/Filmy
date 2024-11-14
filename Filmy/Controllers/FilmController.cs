@@ -45,7 +45,7 @@ namespace Filmy.Controllers
         // GET: FilmController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(films.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: FilmController/Edit/5
@@ -66,22 +66,16 @@ namespace Filmy.Controllers
         // GET: FilmController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(films.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: FilmController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Film film)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            films.Remove(films.FirstOrDefault(x => x.Id == id));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
