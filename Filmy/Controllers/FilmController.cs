@@ -22,28 +22,24 @@ namespace Filmy.Controllers
         // GET: FilmController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(films.FirstOrDefault(x=>x.Id==id));
         }
 
         // GET: FilmController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Film());
         }
 
         // POST: FilmController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Film film)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            film.Id = films.Count +1;
+            films.Add(film);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: FilmController/Edit/5
