@@ -74,7 +74,8 @@ namespace Filmy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Film film)
         {
-            films.Remove(films.FirstOrDefault(x => x.Id == id));
+            Film filmm = films.FirstOrDefault(x => x.Id == id);
+            films.Remove(filmm);
             return RedirectToAction(nameof(Index));
         }
     }
